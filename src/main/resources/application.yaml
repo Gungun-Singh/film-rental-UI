@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: film-rental-frontend
+
+  thymeleaf:
+    cache: false
+
+frontend:
+  backend:
+    base-url: http://localhost:8081
+
+server:
+  port: 7070
