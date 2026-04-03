@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::section})}">
+<section>
+    <section class="hero hero--wide">
+        <div>
+            <p class="eyebrow">Film rental experience</p>
+            <h1>A simpler front desk for your film catalogue.</h1>
+            <p class="page-subtitle">
+                Move through films, customers, stores, and rental history with fast server-rendered pages and a cleaner interface.
+            </p>
+            <div class="hero-actions">
+                <a class="btn btn-primary" th:href="@{/films}">Browse films</a>
+                <a class="btn btn-secondary" th:href="@{/customers}">Find a customer</a>
+            </div>
+        </div>
+        <div class="hero-panel">
+            <h2 class="section-title">Start here</h2>
+            <div class="feature-list">
+                <a class="feature-item" th:href="@{/films}">
+                    <span class="feature-title">Film catalogue</span>
+                    <span class="feature-copy">Open popular titles, film details, and category collections.</span>
+                </a>
+                <a class="feature-item" th:href="@{/rentals}">
+                    <span class="feature-title">Rental history</span>
+                    <span class="feature-copy">Look up a customer and review active or past rentals.</span>
+                </a>
+                <a class="feature-item" th:href="@{/stores}">
+                    <span class="feature-title">Store inventory</span>
+                    <span class="feature-copy">Check stock by store or jump to a specific inventory record.</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-head">
+            <div>
+                <p class="eyebrow">Popular now</p>
+                <h2 class="section-title">Top rented films</h2>
+            </div>
+            <a class="text-link" th:href="@{/films}">Open the catalogue</a>
+        </div>
+        <div class="cards" th:if="${not #lists.isEmpty(topFilms)}">
+            <article class="card" th:each="film : ${topFilms}">
+                <div class="card-body">
+                    <p class="card-kicker" th:text="${film['rating']} ?: 'Featured film'">Featured film</p>
+                    <h3 class="card-title" th:text="${film['title']}">Film title</h3>
+                    <p class="card-copy" th:text="${film['description']} ?: 'A well-loved title from the collection.'">Description</p>
+                </div>
+                <div class="card-meta">
+                    <span th:text="${film['releaseYear']} ?: 'Unknown year'">2004</span>
+                    <span th:text="${#lists.isEmpty(film['categories']) ? 'Classic collection' : film['categories'][0]}">Drama</span>
+                </div>
+                <a class="card-link" th:href="@{/films/{id}(id=${film['filmId']})}">View details</a>
+            </article>
+        </div>
+        <div class="empty-state" th:if="${#lists.isEmpty(topFilms)}">
+            No film data is available yet.
+        </div>
+    </section>
+</section>
+</html>
