@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::section})}">
+<section>
+  <div class="section-head section-head--page">
+    <div>
+      <p class="eyebrow">Films</p>
+      <h1 class="page-title">Discover a film or open a collection</h1>
+      <p class="page-subtitle">Search directly when you know an ID, or start with the most rented titles.</p>
+    </div>
+  </div>
+
+  <div class="lookup-grid">
+    <article class="panel">
+      <h2 class="panel-title">Open a film</h2>
+      <form class="form-grid" method="get" th:action="@{/films/open}">
+        <label class="field">
+          <span>Film ID</span>
+          <input type="number" name="filmId" min="1" required>
+        </label>
+        <button class="btn btn-primary" type="submit">View film</button>
+      </form>
+    </article>
+    <article class="panel">
+      <h2 class="panel-title">Browse by category</h2>
+      <form class="form-grid" method="get" th:action="@{/films/category/open}">
+        <label class="field">
+          <span>Category ID</span>
+          <input type="number" name="categoryId" min="1" required>
+        </label>
+        <button class="btn btn-primary" type="submit">Open collection</button>
+      </form>
+    </article>
+    <article class="panel">
+      <h2 class="panel-title">Browse by actor</h2>
+      <form class="form-grid" method="get" th:action="@{/films/actor/open}">
+        <label class="field">
+          <span>Actor ID</span>
+          <input type="number" name="actorId" min="1" required>
+        </label>
+        <button class="btn btn-primary" type="submit">Open actor films</button>
+      </form>
+    </article>
+  </div>
+
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Featured shelf</p>
+        <h2 class="section-title">Most rented right now</h2>
+      </div>
+    </div>
+    <div class="cards" th:if="${not #lists.isEmpty(topFilms)}">
+      <article class="card" th:each="film : ${topFilms}">
+        <div class="card-body">
+          <p class="card-kicker" th:text="${film['rating']} ?: 'Popular'">Popular</p>
+          <h3 class="card-title" th:text="${film['title']}">Film title</h3>
+          <p class="card-copy" th:text="${film['description']} ?: 'One of the most rented films in the catalogue.'">Description</p>
+        </div>
+        <div class="card-meta">
+          <span th:text="${film['releaseYear']} ?: 'Year unavailable'">2004</span>
+          <span th:text="${film['language']} ?: 'Language unavailable'">English</span>
+        </div>
+        <a class="card-link" th:href="@{/films/{id}(id=${film['filmId']})}">View details</a>
+      </article>
+    </div>
+    <div class="empty-state" th:if="${#lists.isEmpty(topFilms)}">No films are available to show.</div>
+  </section>
+</section>
+</html>
