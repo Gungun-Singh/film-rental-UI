@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::section})}">
+<section>
+    <div class="section-head section-head--page">
+        <div>
+            <p class="eyebrow">Store shelf</p>
+            <h1 class="page-title">Inventory for store <span th:text="${storeId}">1</span></h1>
+            <p class="page-subtitle">Every matching copy for this store.</p>
+        </div>
+    </div>
+    <div class="table-wrap" th:if="${not #lists.isEmpty(inventories)}">
+        <table>
+            <thead>
+            <tr>
+                <th>Inventory</th>
+                <th>Film</th>
+                <th>Store</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="inventory : ${inventories}">
+                <td th:text="${inventory['inventoryId']}">1</td>
+                <td th:text="${inventory['filmTitle']} ?: 'Unavailable'">Film</td>
+                <td th:text="${inventory['storeId']} ?: 'Unavailable'">1</td>
+                <td th:text="${inventory['available']} ?: 'Unavailable'">true</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="empty-state" th:if="${#lists.isEmpty(inventories)}">No matching inventory items were found.</div>
+</section>
+</html>
