@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::section})}">
+<section>
+    <div class="section-head section-head--page">
+        <div>
+            <p class="eyebrow">Inventory</p>
+            <h1 class="page-title">Open a specific inventory view</h1>
+            <p class="page-subtitle">Find an individual copy, a full store shelf, or every copy of one film.</p>
+        </div>
+    </div>
+    <div class="lookup-grid">
+        <article class="panel">
+            <h2 class="panel-title">Single inventory record</h2>
+            <form class="form-grid" method="get" th:action="@{/inventory/open}">
+                <label class="field">
+                    <span>Inventory ID</span>
+                    <input type="number" name="inventoryId" min="1" required>
+                </label>
+                <button class="btn btn-primary" type="submit">Open record</button>
+            </form>
+        </article>
+        <article class="panel">
+            <h2 class="panel-title">Inventory by store</h2>
+            <form class="form-grid" method="get" th:action="@{/inventory/store/open}">
+                <label class="field">
+                    <span>Store ID</span>
+                    <input type="number" name="storeId" min="1" required>
+                </label>
+                <button class="btn btn-primary" type="submit">Open store shelf</button>
+            </form>
+        </article>
+        <article class="panel">
+            <h2 class="panel-title">Inventory by film</h2>
+            <form class="form-grid" method="get" th:action="@{/inventory/film/open}">
+                <label class="field">
+                    <span>Film ID</span>
+                    <input type="number" name="filmId" min="1" required>
+                </label>
+                <button class="btn btn-primary" type="submit">Open film copies</button>
+            </form>
+        </article>
+    </div>
+</section>
+</html>
