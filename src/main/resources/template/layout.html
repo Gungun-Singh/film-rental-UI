@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="layout(content)">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${pageTitle} + ' | Film Rental Store'">Film Rental Store</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<div class="page-shell">
+    <header class="topbar">
+        <a class="brand" th:href="@{/}">
+        <span class="brand-badge" aria-hidden="true">
+          <svg class="brand-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="7" y="11" width="34" height="26" rx="8" fill="currentColor" fill-opacity="0.18" stroke="currentColor" stroke-width="2"/>
+            <rect x="12" y="16" width="24" height="12" rx="4" fill="currentColor" fill-opacity="0.22"/>
+            <circle cx="18" cy="22" r="4.5" fill="none" stroke="currentColor" stroke-width="2"/>
+            <circle cx="30" cy="22" r="4.5" fill="none" stroke="currentColor" stroke-width="2"/>
+            <circle cx="18" cy="22" r="1.2" fill="currentColor"/>
+            <circle cx="30" cy="22" r="1.2" fill="currentColor"/>
+            <path d="M15 33H33" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M20 28.5L24 33L28 28.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+            <span>
+          <span class="brand-title">Film Rental Store</span>
+          <span class="brand-subtitle">Browse films, customers, rentals, and stores in one calm workspace.</span>
+        </span>
+        </a>
+        <nav class="nav">
+            <a th:href="@{/}" th:classappend="${pageKey == 'home'} ? ' is-active'">Home</a>
+            <a th:href="@{/films}" th:classappend="${pageKey.startsWith('film')} ? ' is-active'">Films</a>
+            <a th:href="@{/customers}" th:classappend="${pageKey.startsWith('customer')} ? ' is-active'">Customers</a>
+            <a th:href="@{/actors}" th:classappend="${pageKey.startsWith('actors')} ? ' is-active'">Actors</a>
+            <a th:href="@{/stores}" th:classappend="${pageKey.startsWith('store')} ? ' is-active'">Stores</a>
+            <a th:href="@{/inventory}" th:classappend="${pageKey.startsWith('inventory')} ? ' is-active'">Inventory</a>
+            <a th:href="@{/rentals}" th:classappend="${pageKey.startsWith('rental')} ? ' is-active'">Rentals</a>
+        </nav>
+    </header>
+
+    <div class="notice notice--warning" th:if="${errorMessage}" th:text="${errorMessage}">
+        The frontend could not load data from the backend right now.
+    </div>
+
+    <main th:replace="${content}"></main>
+</div>
+</body>
+</html>
