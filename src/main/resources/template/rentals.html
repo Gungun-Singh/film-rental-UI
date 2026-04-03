@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::section})}">
+<section>
+    <div class="section-head section-head--page">
+        <div>
+            <p class="eyebrow">Rentals</p>
+            <h1 class="page-title">Open a customer's rental history</h1>
+            <p class="page-subtitle">Find rentals by customer and review returns at a glance.</p>
+        </div>
+    </div>
+    <article class="panel panel--narrow">
+        <h2 class="panel-title">Rental lookup</h2>
+        <form class="form-grid" method="get" th:action="@{/rentals/open}">
+            <label class="field">
+                <span>Customer ID</span>
+                <input type="number" name="customerId" min="1" required>
+            </label>
+            <button class="btn btn-primary" type="submit">Open history</button>
+        </form>
+    </article>
+</section>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::section})}">
+<section>
+    <div class="section-head section-head--page">
+        <div>
+            <p class="eyebrow">Rental history</p>
+            <h1 class="page-title">Customer <span th:text="${customerId}">1</span></h1>
+            <p class="page-subtitle">A simple timeline of rentals and returns.</p>
+        </div>
+    </div>
+    <div class="table-wrap" th:if="${not #lists.isEmpty(rentals)}">
+        <table>
+            <thead>
+            <tr>
+                <th>Rental</th>
+                <th>Film</th>
+                <th>Rented on</th>
+                <th>Returned</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="rental : ${rentals}">
+                <td th:text="${rental['rentalId']}">1</td>
+                <td th:text="${rental['filmTitle']} ?: 'Unavailable'">Film</td>
+                <td th:text="${rental['rentalDate']} ?: 'Unavailable'">Date</td>
+                <td th:text="${rental['returnDate']} ?: 'Still out'">Date</td>
+                <td th:text="${rental['returnDate']} != null ? 'Returned' : 'Open'">Open</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="empty-state" th:if="${#lists.isEmpty(rentals)}">No rental history was found for this customer.</div>
+</section>
+</html>

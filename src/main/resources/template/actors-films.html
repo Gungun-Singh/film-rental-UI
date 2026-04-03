@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::section})}">
+<section>
+    <div class="section-head section-head--page">
+        <div>
+            <p class="eyebrow">Actors</p>
+            <h1 class="page-title">Open an actor's filmography</h1>
+            <p class="page-subtitle">Use an actor ID to view the films they appear in.</p>
+        </div>
+    </div>
+    <article class="panel panel--narrow">
+        <h2 class="panel-title">Actor search</h2>
+        <form class="form-grid" method="get" th:action="@{/actors/open}">
+            <label class="field">
+                <span>Actor ID</span>
+                <input type="number" name="actorId" min="1" required>
+            </label>
+            <button class="btn btn-primary" type="submit">View filmography</button>
+        </form>
+    </article>
+</section>
+</html>
