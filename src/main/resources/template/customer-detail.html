@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::section})}">
+<section>
+    <div th:if="${not #maps.isEmpty(customer)}">
+        <div class="detail-hero">
+            <div class="detail-main">
+                <p class="eyebrow">Customer profile</p>
+                <h1 class="page-title" th:text="${(customer['firstName'] ?: '') + ' ' + (customer['lastName'] ?: '')}">Customer Name</h1>
+                <p class="page-subtitle" th:text="${customer['email']} ?: 'No email available'">Email</p>
+            </div>
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <span class="detail-label">Store</span>
+                    <strong th:text="${customer['storeId']} ?: 'Unknown'">1</strong>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Status</span>
+                    <strong th:text="${customer['active'] == 1 ? 'Active' : 'Inactive'}">Active</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-layout">
+            <section class="table-panel">
+                <div class="section-head">
+                    <h2 class="section-title">Recent rentals</h2>
+                </div>
+                <div class="table-wrap" th:if="${not #lists.isEmpty(rentals)}">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Rental</th>
+                            <th>Film</th>
+                            <th>Rented on</th>
+                            <th>Returned</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="rental : ${rentals}">
+                            <td th:text="${rental['rentalId']}">1</td>
+                            <td th:text="${rental['filmTitle']} ?: 'Unavailable'">Film</td>
+                            <td th:text="${rental['rentalDate']} ?: 'Unavailable'">Date</td>
+                            <td th:text="${rental['returnDate']} ?: 'Still out'">Date</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="empty-state empty-state--compact" th:if="${#lists.isEmpty(rentals)}">No rentals found.</div>
+            </section>
+
+            <section class="table-panel">
+                <div class="section-head">
+                    <h2 class="section-title">Payments</h2>
+                </div>
+                <div class="table-wrap" th:if="${not #lists.isEmpty(payments)}">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Payment</th>
+                            <th>Amount</th>
+                            <th>Date</th>
+                            <th>Staff</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="payment : ${payments}">
+                            <td th:text="${payment['paymentId']}">1</td>
+                            <td th:text="${payment['amount']} ?: 'Unavailable'">5.99</td>
+                            <td th:text="${payment['paymentDate']} ?: 'Unavailable'">Date</td>
+                            <td th:text="${payment['status']} ?: 'Unavailable'">Completed</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="empty-state empty-state--compact" th:if="${#lists.isEmpty(payments)}">No payments found.</div>
+            </section>
+        </div>
+    </div>
+    <div class="empty-state" th:if="${#maps.isEmpty(customer)}">This customer could not be loaded.</div>
+</section>
+</html>
