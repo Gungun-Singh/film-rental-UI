@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::section})}">
 <section>
-  <div class="section-head section-head--page">
-    <div>
-      <p class="eyebrow">Collection</p>
-      <h1 class="page-title">Category <span th:text="${categoryId}">1</span></h1>
-      <p class="page-subtitle">A focused view of the films in this category.</p>
+    <div class="section-head section-head--page">
+        <div>
+            <p class="eyebrow">Collection</p>
+            <h1 class="page-title">Category <span th:text="${categoryId}">1</span></h1>
+            <p class="page-subtitle">A focused view of the films in this category.</p>
+        </div>
+        <a class="text-link" th:href="@{/films}">Back to films</a>
     </div>
-    <a class="text-link" th:href="@{/films}">Back to films</a>
-  </div>
-  <div class="cards" th:if="${not #lists.isEmpty(films)}">
-    <article class="card" th:each="film : ${films}">
-      <div class="card-body">
-        <p class="card-kicker" th:text="${film['rating']} ?: 'Collection title'">Collection title</p>
-        <h3 class="card-title" th:text="${film['title']}">Film title</h3>
-        <p class="card-copy" th:text="${film['description']} ?: 'A film in the selected category.'">Description</p>
-      </div>
-      <div class="card-meta">
-        <span th:text="${film['releaseYear']} ?: 'Year unavailable'">2003</span>
-        <span th:text="${film['rentalRate']} ?: 'Rate unavailable'">2.99</span>
-      </div>
-      <a class="card-link" th:href="@{/films/{id}(id=${film['filmId']})}">View details</a>
-    </article>
-  </div>
-  <div class="empty-state" th:if="${#lists.isEmpty(films)}">No films were found for this category.</div>
+    <div class="cards" th:if="${not #lists.isEmpty(films)}">
+        <article class="card" th:each="film : ${films}">
+            <div class="card-body">
+                <p class="card-kicker" th:text="${film['rating']} ?: 'Collection title'">Collection title</p>
+                <h3 class="card-title" th:text="${film['title']}">Film title</h3>
+                <p class="card-copy" th:text="${film['description']} ?: 'A film in the selected category.'">Description</p>
+            </div>
+            <div class="card-meta">
+                <span th:text="${film['releaseYear']} ?: 'Year unavailable'">2003</span>
+                <span th:text="${film['rentalRate']} ?: 'Rate unavailable'">2.99</span>
+            </div>
+            <a class="card-link" th:href="@{/films/{id}(id=${film['filmId']})}">View details</a>
+        </article>
+    </div>
+    <div class="empty-state" th:if="${#lists.isEmpty(films)}">No films were found for this category.</div>
 </section>
 </html>
