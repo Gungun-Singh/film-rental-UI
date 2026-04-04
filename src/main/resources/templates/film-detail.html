@@ -1,53 +1,53 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::section})}">
 <section>
-  <div class="detail-hero" th:if="${not #maps.isEmpty(film)}">
-    <div class="detail-main">
-      <p class="eyebrow" th:text="${film['rating']} ?: 'Film detail'">Film detail</p>
-      <h1 class="page-title" th:text="${film['title']}">Film title</h1>
-      <p class="page-subtitle" th:text="${film['description']} ?: 'No description is available for this title.'">Description</p>
-    </div>
-    <div class="detail-grid">
-      <div class="detail-item">
-        <span class="detail-label">Release year</span>
-        <strong th:text="${film['releaseYear']} ?: 'Unknown'">2001</strong>
-      </div>
-      <div class="detail-item">
-        <span class="detail-label">Running time</span>
-        <strong th:text="${film['length']} ?: 'Unknown'">95</strong>
-      </div>
-      <div class="detail-item">
-        <span class="detail-label">Language</span>
-        <strong th:text="${film['language']} ?: 'Unknown'">English</strong>
-      </div>
-      <div class="detail-item">
-        <span class="detail-label">Rental rate</span>
-        <strong th:text="${film['rentalRate']} ?: 'Unknown'">2.99</strong>
-      </div>
-      <div class="detail-item">
-        <span class="detail-label">Replacement cost</span>
-        <strong th:text="${film['replacementCost']} ?: 'Unknown'">19.99</strong>
-      </div>
-      <div class="detail-item">
-        <span class="detail-label">Categories</span>
-        <strong th:if="${#lists.isEmpty(film['categories'])}">Unknown</strong>
-        <strong th:unless="${#lists.isEmpty(film['categories'])}">
+    <div class="detail-hero" th:if="${not #maps.isEmpty(film)}">
+        <div class="detail-main">
+            <p class="eyebrow" th:text="${film['rating']} ?: 'Film detail'">Film detail</p>
+            <h1 class="page-title" th:text="${film['title']}">Film title</h1>
+            <p class="page-subtitle" th:text="${film['description']} ?: 'No description is available for this title.'">Description</p>
+        </div>
+        <div class="detail-grid">
+            <div class="detail-item">
+                <span class="detail-label">Release year</span>
+                <strong th:text="${film['releaseYear']} ?: 'Unknown'">2001</strong>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Running time</span>
+                <strong th:text="${film['length']} ?: 'Unknown'">95</strong>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Language</span>
+                <strong th:text="${film['language']} ?: 'Unknown'">English</strong>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Rental rate</span>
+                <strong th:text="${film['rentalRate']} ?: 'Unknown'">2.99</strong>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Replacement cost</span>
+                <strong th:text="${film['replacementCost']} ?: 'Unknown'">19.99</strong>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Categories</span>
+                <strong th:if="${#lists.isEmpty(film['categories'])}">Unknown</strong>
+                <strong th:unless="${#lists.isEmpty(film['categories'])}">
           <span th:each="category, categoryStat : ${film['categories']}">
             <span th:text="${category}">Drama</span><span th:if="${!categoryStat.last}">, </span>
           </span>
-        </strong>
-      </div>
-      <div class="detail-item">
-        <span class="detail-label">Cast</span>
-        <strong th:if="${#lists.isEmpty(film['actors'])}">Unknown</strong>
-        <strong th:unless="${#lists.isEmpty(film['actors'])}">
+                </strong>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Cast</span>
+                <strong th:if="${#lists.isEmpty(film['actors'])}">Unknown</strong>
+                <strong th:unless="${#lists.isEmpty(film['actors'])}">
           <span th:each="actor, actorStat : ${film['actors']}">
             <span th:text="${actor}">Actor</span><span th:if="${!actorStat.last}">, </span>
           </span>
-        </strong>
-      </div>
+                </strong>
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="empty-state" th:if="${#maps.isEmpty(film)}">This film could not be loaded.</div>
+    <div class="empty-state" th:if="${#maps.isEmpty(film)}">This film could not be loaded.</div>
 </section>
 </html>
