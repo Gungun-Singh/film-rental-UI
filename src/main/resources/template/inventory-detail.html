@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::section})}">
+<section>
+    <div class="detail-hero" th:if="${not #maps.isEmpty(inventory)}">
+        <div class="detail-main">
+            <p class="eyebrow">Inventory record</p>
+            <h1 class="page-title" th:text="${inventory['filmTitle']} ?: 'Inventory detail'">Film title</h1>
+            <p class="page-subtitle">Inventory ID <span th:text="${inventoryId}">1</span></p>
+        </div>
+        <div class="detail-grid">
+            <div class="detail-item">
+                <span class="detail-label">Store</span>
+                <strong th:text="${inventory['storeId']} ?: 'Unavailable'">1</strong>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Film ID</span>
+                <strong th:text="${inventory['filmId']} ?: 'Unavailable'">1</strong>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Available</span>
+                <strong th:text="${inventory['available']} ?: 'Unavailable'">true</strong>
+            </div>
+        </div>
+    </div>
+    <div class="empty-state" th:if="${#maps.isEmpty(inventory)}">This inventory record could not be loaded.</div>
+</section>
+</html>
