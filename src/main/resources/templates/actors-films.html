@@ -3,20 +3,25 @@
 <section>
     <div class="section-head section-head--page">
         <div>
-            <p class="eyebrow">Actors</p>
-            <h1 class="page-title">Open an actor's filmography</h1>
-            <p class="page-subtitle">Use an actor ID to view the films they appear in.</p>
+            <p class="eyebrow">Actor spotlight</p>
+            <h1 class="page-title">Films for actor <span th:text="${actorId}">1</span></h1>
+            <p class="page-subtitle">A focused list of titles connected to this actor.</p>
         </div>
     </div>
-    <article class="panel panel--narrow">
-        <h2 class="panel-title">Actor search</h2>
-        <form class="form-grid" method="get" th:action="@{/actors/open}">
-            <label class="field">
-                <span>Actor ID</span>
-                <input type="number" name="actorId" min="1" required>
-            </label>
-            <button class="btn btn-primary" type="submit">View filmography</button>
-        </form>
-    </article>
+    <div class="cards" th:if="${not #lists.isEmpty(films)}">
+        <article class="card" th:each="film : ${films}">
+            <div class="card-body">
+                <p class="card-kicker" th:text="${film['rating']} ?: 'Film title'">Film title</p>
+                <h3 class="card-title" th:text="${film['title']}">Film title</h3>
+                <p class="card-copy" th:text="${film['description']} ?: 'A film featuring this actor.'">Description</p>
+            </div>
+            <div class="card-meta">
+                <span th:text="${film['releaseYear']} ?: 'Year unavailable'">2004</span>
+                <span th:text="${#lists.isEmpty(film['categories']) ? 'Category unavailable' : film['categories'][0]}">Drama</span>
+            </div>
+            <a class="card-link" th:href="@{/films/{id}(id=${film['filmId']})}">View details</a>
+        </article>
+    </div>
+    <div class="empty-state" th:if="${#lists.isEmpty(films)}">No films were found for this actor.</div>
 </section>
 </html>
