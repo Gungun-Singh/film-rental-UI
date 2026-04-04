@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::section})}">
+<section>
+    <div class="detail-hero" th:if="${not #maps.isEmpty(store)}">
+        <div class="detail-main">
+            <p class="eyebrow">Store manager</p>
+            <h1 class="page-title">Store for manager <span th:text="${managerStaffId}">1</span></h1>
+            <p class="page-subtitle" th:text="${store['address']} ?: 'Address unavailable'">Address</p>
+        </div>
+        <div class="detail-grid">
+            <div class="detail-item">
+                <span class="detail-label">Store ID</span>
+                <strong th:text="${store['storeId']} ?: 'Unavailable'">1</strong>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Manager</span>
+                <strong th:text="${(store['managerFirstName'] ?: '') + ' ' + (store['managerLastName'] ?: '')}">Manager</strong>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">City</span>
+                <strong th:text="${store['city']} ?: 'Unavailable'">City</strong>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Country</span>
+                <strong th:text="${store['country']} ?: 'Unavailable'">Country</strong>
+            </div>
+        </div>
+    </div>
+    <div class="empty-state" th:if="${#maps.isEmpty(store)}">No store was found for this manager.</div>
+</section>
+</html>

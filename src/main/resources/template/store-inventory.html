@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::section})}">
+<section>
+    <div class="section-head section-head--page">
+        <div>
+            <p class="eyebrow">Store inventory</p>
+            <h1 class="page-title">Inventory for store <span th:text="${storeId}">1</span></h1>
+            <p class="page-subtitle">A store-focused view of titles and availability.</p>
+        </div>
+    </div>
+    <div class="table-wrap" th:if="${not #lists.isEmpty(items)}">
+        <table>
+            <thead>
+            <tr>
+                <th>Inventory</th>
+                <th>Film</th>
+                <th>Store</th>
+                <th>Manager</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${items}">
+                <td th:text="${item['inventoryId']}">1</td>
+                <td th:text="${item['filmTitle']} ?: 'Unavailable'">Title</td>
+                <td th:text="${item['storeId']} ?: 'Unavailable'">1</td>
+                <td th:text="${(item['managerFirstName'] ?: '') + ' ' + (item['managerLastName'] ?: '')}">Manager</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="empty-state" th:if="${#lists.isEmpty(items)}">No inventory items were found for this store.</div>
+</section>
+</html>

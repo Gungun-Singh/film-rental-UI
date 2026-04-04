@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::section})}">
+<section>
+    <div class="section-head section-head--page">
+        <div>
+            <p class="eyebrow">Stores</p>
+            <h1 class="page-title">Check a store or open its inventory</h1>
+            <p class="page-subtitle">Quick access to store details and what each location currently holds.</p>
+        </div>
+    </div>
+    <div class="lookup-grid">
+        <article class="panel">
+            <h2 class="panel-title">Store profile</h2>
+            <form class="form-grid" method="get" th:action="@{/stores/open}">
+                <label class="field">
+                    <span>Store ID</span>
+                    <input type="number" name="storeId" min="1" required>
+                </label>
+                <button class="btn btn-primary" type="submit">Open store</button>
+            </form>
+        </article>
+        <article class="panel">
+            <h2 class="panel-title">Find by manager</h2>
+            <form class="form-grid" method="get" th:action="@{/stores/manager/open}">
+                <label class="field">
+                    <span>Manager Staff ID</span>
+                    <input type="number" name="managerStaffId" min="1" required>
+                </label>
+                <button class="btn btn-primary" type="submit">Open manager store</button>
+            </form>
+        </article>
+        <article class="panel">
+            <h2 class="panel-title">Store inventory</h2>
+            <form class="form-grid" method="get" th:action="@{/stores/inventory/open}">
+                <label class="field">
+                    <span>Store ID</span>
+                    <input type="number" name="storeId" min="1" required>
+                </label>
+                <button class="btn btn-primary" type="submit">Open inventory</button>
+            </form>
+        </article>
+    </div>
+</section>
+</html>
